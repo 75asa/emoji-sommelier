@@ -11,7 +11,10 @@
   "scripts": {
     "start": "node dest/index.js",
     "build": "tsc -p .",
-    "build:watch": "tsc --watch"
+    "build:watch": "tsc --watch",
+    "build:remote": "make gcr-push && make gcr-deploy",
+    "logs": "gcloud app logs read",
+    "logs:tail": "gcloud app logs tail"
   },
   "dependencies": {
     "@slack/bolt": "^2.4.1",

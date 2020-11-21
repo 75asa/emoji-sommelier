@@ -1,7 +1,7 @@
 # variables ----
 
 	STAGE := dev
-	SERVICE_NAME := emoji-syncher
+	SERVICE_NAME := emoji-syncher-app
 	PROJECT := emoji-syncher
 
 # docker -------

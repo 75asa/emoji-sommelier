@@ -4,13 +4,10 @@ WORKDIR /app
 ARG STAGE
 ENV STAGE=${STAGE}
 COPY package.json /app/package.json
-# COPY package-lock.json /app/package-lock.json
 COPY yarn.lock /app/yarn.lock
 COPY tsconfig.json /app/tsconfig.json
 COPY envs/.env.$STAGE /app/envs/.env.$STAGE
 COPY src/ /app/src
 
-# RUN mkdir dest/ && npm i && npm run build
 RUN mkdir dest/ && yarn && yarn build
-# CMD ["npm", "start"]
 CMD ["yarn", "start"]

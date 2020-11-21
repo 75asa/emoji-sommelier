@@ -21,22 +21,22 @@ restart:
 
 # gcloud -------
 
-push-gcr:
+gcr-push:
 	export STAGE=$(STAGE)
 	export PROJECT=$(PROJECT)
 	gcloud builds submit \
   --project="$(PROJECT)" \
   --config cloudbuild.yml
-deploy-gcr:
+gcr-deploy:
 	export STAGE=$(STAGE)
 	export SERVICE_NAME=$(SERVICE_NAME)
 	export PROJECT=$(PROJECT)
-	gcloud run deploy $(SERVICE_ANME) \
+	gcloud run deploy $(SERVICE_NAME) \
   --project="$(PROJECT)" \
   --image="gcr.io/$(PROJECT)/$(SERVICE_NAME)/$(STAGE)" \
   --platform=managed \
   --region=asia-northeast1 \
   --allow-unauthenticated
-open-gcr:
+gcr-open:
 	open https://console.cloud.google.com/run?hl=ja&project=$(PROJECT)
 

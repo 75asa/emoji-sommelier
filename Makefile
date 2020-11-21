@@ -18,6 +18,8 @@ ps:
 	docker-compose ps
 restart:
 	docker-compose restart
+logs:
+	docker-compose logs $(arg)
 
 # gcloud -------
 

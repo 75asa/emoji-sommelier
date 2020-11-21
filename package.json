@@ -9,7 +9,7 @@
     "@types/node": "^14.14.9"
   },
   "scripts": {
-    "start": "dest/index.js",
+    "start": "node dest/index.js",
     "build": "tsc -p .",
     "build:watch": "tsc --watch"
   },

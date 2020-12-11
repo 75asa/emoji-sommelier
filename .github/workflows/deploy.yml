@@ -1,0 +1,38 @@
+name: deploy
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - 'README.md'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: checkout
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: "14.x"
+         
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+        
+      - name: gcr-push
+        run: gcloud builds submit --project=${{ secrets.PROJECT }} --config cloudbuild.yml
+
+      - name: gcr-deploy
+        run: make gcr-push STAGE=${{ secrets.STAGE }} SERVICE_NAME=${{ secrets.SERVICE_NAME }} PROJECT=${{ secrets.PROJECT }}
+
+      - name: gcr-deploy
+      - run: make gcr-deploy
+
+      - name: gcr-deploy
+      - run: open https://console.cloud.google.com/run?hl=ja&project=${{ secrets.PROJECT }}
